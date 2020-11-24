@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Postt</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" />
+    <link rel="stylesheet" href="/stylesheets/new.css" type="text/css" />
+</head>
+
+<body>
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <div class="header item"><i class="code icon"></i>Blog Site</div>
+            <a href="/" class="item">Home</a>
+            <a href="/blogs/new" class="item">New Post</a>
+            <div class="right menu">
+                <% if(!currentUser){ %>
+                    <div class="item">
+                        <a href="/login" class="ui green basic button">Login</a>
+                    </div>
+                    <div class="item">
+                        <a href="/register" class="ui primary button">Sign Up</a>
+                    </div>
+                    <% }else{ %>
+                        <div class="item">
+                            <button class="ui labeled icon inverted grey button">
+                            <i class="user circle outline icon"></i>
+                            <%= currentUser.username %>
+                            </button>
+                        </div>
+                        <div class="item">
+                            <a href="/logout" class="ui inverted red button">Logout</a>
+                        </div>
+                        <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="ui main text container segment">
+        <div class="ui huge header">New Blog</div>
+        <form class="ui form" action="/blogs" method="POST" enctype="multipart/form-data">
+            <div class="field">
+                <label>Title</label>
+                <input type="text" name="blog[title]" placeholder="title">
+            </div>
+            <div class="field">
+                <label>Image</label>
+                <input class="form-control-file" type="file" accept="image/*" name="photo">
+            </div>
+            <div class="field">
+                <label>Body</label>
+                <textarea name="blog[body]"></textarea>
+            </div>
+            <input class="ui violet inverted button" type="submit">
+        </form>
+        <% if( msg.length > 0){  %>
+            <div class="ui  negative message" style="margin-top: 8em;">
+                <div class="header">
+                    <%= msg %>
+                </div>
+            </div>
+            <%  }%>
+    </div>
+
+</body>
+
+</html>
